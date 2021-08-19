@@ -7,10 +7,20 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
+    @EnvironmentObject var state: StateController
+    let width = UIScreen.main.bounds.width
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack {
+            state.chessBoard.board
+                .fill(Color.gray)
+                .frame(width: width, height: width)
+                .border(Color.black, width: 1)
+            state.chessBoard.placePieces()
+            
+        }
+            
     }
 }
 

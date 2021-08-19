@@ -12,6 +12,7 @@ struct ChessAIApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(StateController())
         }
     }
 }

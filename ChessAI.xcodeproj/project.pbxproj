@@ -13,6 +13,9 @@
 		7E4C988826C95353001839FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E4C988726C95353001839FF /* Preview Assets.xcassets */; };
 		7E4C989326C95353001839FF /* ChessAITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C989226C95353001839FF /* ChessAITests.swift */; };
 		7E4C989E26C95353001839FF /* ChessAIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C989D26C95353001839FF /* ChessAIUITests.swift */; };
+		7E4C98AF26C954C3001839FF /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C98AE26C954C3001839FF /* File.swift */; };
+		7E4C98B626C96E81001839FF /* ChessBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C98B526C96E80001839FF /* ChessBoard.swift */; };
+		7E4C98EE26CEA732001839FF /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C98ED26CEA732001839FF /* StateController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,9 @@
 		7E4C989926C95353001839FF /* ChessAIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChessAIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E4C989D26C95353001839FF /* ChessAIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessAIUITests.swift; sourceTree = "<group>"; };
 		7E4C989F26C95353001839FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E4C98AE26C954C3001839FF /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		7E4C98B526C96E80001839FF /* ChessBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessBoard.swift; sourceTree = "<group>"; };
+		7E4C98ED26CEA732001839FF /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +102,10 @@
 			isa = PBXGroup;
 			children = (
 				7E4C988026C9534E001839FF /* ChessAIApp.swift */,
+				7E4C98AE26C954C3001839FF /* File.swift */,
+				7E4C98B526C96E80001839FF /* ChessBoard.swift */,
 				7E4C988226C9534E001839FF /* ContentView.swift */,
+				7E4C98ED26CEA732001839FF /* StateController.swift */,
 				7E4C988426C95353001839FF /* Assets.xcassets */,
 				7E4C988926C95353001839FF /* Info.plist */,
 				7E4C988626C95353001839FF /* Preview Content */,
@@ -260,7 +269,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E4C988326C9534E001839FF /* ContentView.swift in Sources */,
+				7E4C98B626C96E81001839FF /* ChessBoard.swift in Sources */,
+				7E4C98AF26C954C3001839FF /* File.swift in Sources */,
 				7E4C988126C9534E001839FF /* ChessAIApp.swift in Sources */,
+				7E4C98EE26CEA732001839FF /* StateController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
