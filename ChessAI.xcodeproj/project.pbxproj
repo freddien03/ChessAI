@@ -16,6 +16,8 @@
 		7E4C98AF26C954C3001839FF /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C98AE26C954C3001839FF /* File.swift */; };
 		7E4C98B626C96E81001839FF /* ChessBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C98B526C96E80001839FF /* ChessBoard.swift */; };
 		7E4C98EE26CEA732001839FF /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C98ED26CEA732001839FF /* StateController.swift */; };
+		7EA0DD3426DD51A800261FBA /* PieceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0DD3326DD51A800261FBA /* PieceItem.swift */; };
+		7EA0DD3926DD558B00261FBA /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0DD3826DD558B00261FBA /* Piece.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		7E4C98AE26C954C3001839FF /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		7E4C98B526C96E80001839FF /* ChessBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessBoard.swift; sourceTree = "<group>"; };
 		7E4C98ED26CEA732001839FF /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
+		7EA0DD3326DD51A800261FBA /* PieceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceItem.swift; sourceTree = "<group>"; };
+		7EA0DD3826DD558B00261FBA /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +108,9 @@
 				7E4C988026C9534E001839FF /* ChessAIApp.swift */,
 				7E4C98AE26C954C3001839FF /* File.swift */,
 				7E4C98B526C96E80001839FF /* ChessBoard.swift */,
+				7EA0DD3826DD558B00261FBA /* Piece.swift */,
 				7E4C988226C9534E001839FF /* ContentView.swift */,
+				7EA0DD3326DD51A800261FBA /* PieceItem.swift */,
 				7E4C98ED26CEA732001839FF /* StateController.swift */,
 				7E4C988426C95353001839FF /* Assets.xcassets */,
 				7E4C988926C95353001839FF /* Info.plist */,
@@ -269,10 +275,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E4C988326C9534E001839FF /* ContentView.swift in Sources */,
+				7EA0DD3926DD558B00261FBA /* Piece.swift in Sources */,
 				7E4C98B626C96E81001839FF /* ChessBoard.swift in Sources */,
 				7E4C98AF26C954C3001839FF /* File.swift in Sources */,
 				7E4C988126C9534E001839FF /* ChessAIApp.swift in Sources */,
 				7E4C98EE26CEA732001839FF /* StateController.swift in Sources */,
+				7EA0DD3426DD51A800261FBA /* PieceItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
