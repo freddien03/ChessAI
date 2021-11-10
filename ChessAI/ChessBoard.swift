@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class ChessBoard {
+class ChessBoard: ObservableObject {
     let width = UIScreen.main.bounds.width
     let board = Board(rows: 8, columns: 8)
 //    var pieces1 = [

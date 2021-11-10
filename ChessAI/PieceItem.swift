@@ -11,15 +11,13 @@ struct PieceItem: View {
     let width = UIScreen.main.bounds.width
     @ObservedObject var piece: Piece
     var body: some View {
-        if piece.position != [0, 0]{
-            Button(action: { piece.position = [0, 0] }) {
+        if piece.isAlive == false{
+            Button(action: { piece.isAlive.toggle() }) {
                 Image(piece.name)
                     .resizable()
                     .frame(width: width/8, height: width/8)
             }
             .offset(x: (width/2)-(2*(CGFloat(piece.position[0]))-1)*(width/16), y: (width/2)-(2*CGFloat(piece.position[1])-1)*(width/16))
-        } else {
-            Text("gone")
         }
     }
 }

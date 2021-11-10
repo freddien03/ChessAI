@@ -12,6 +12,7 @@ class Piece: ObservableObject{
     let name: String
     let id: String
     var position: [Int]
+    @Published var isAlive = false
     
     init(name: String, id: String, position: [Int]) {
         self.name = name
