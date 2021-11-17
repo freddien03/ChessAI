@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct PieceItem: View {
+    @EnvironmentObject var state: StateController
     let width = UIScreen.main.bounds.width
     @ObservedObject var piece: Piece
     var body: some View {
         if piece.isAlive == false{
-            Button(action: { piece.isAlive.toggle() }) {
+            Button(action: {
+                state.isSelected.toggle()
+                state.pieceSelected = piece
+            }) {
                 Image(piece.name)
                     .resizable()
                     .frame(width: width/8, height: width/8)

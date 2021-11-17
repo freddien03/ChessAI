@@ -17,21 +17,16 @@ struct ContentView: View {
                 .fill(Color.gray)
                 .frame(width: width, height: width)
                 .border(Color.black, width: 1)
-//            state.chessBoard.placePieces()
-//            ForEach(0..<state.chessBoard.pieces.count, id: \.self) { num in
-//                VStack {
-//                    if state.chessBoard.pieces1[state.chessBoard.pieces[num]] != [0, 0] {
-//                        Button(action: { state.chessBoard.pieces1[state.chessBoard.pieces[num]] = [0, 0] }) {
-//                            Image(state.chessBoard.remainingPieces[num])
-//                        }
-//                        .offset(x: state.chessBoard.calcCoords(num: num)[0], y: state.chessBoard.calcCoords(num: num)[1])
-//                    }
-//                }
-//            }
-            ZStack{
+            
             ForEach(state.chessBoard.pieces, id: \.self.id) { piece in
                 PieceItem(piece: piece)
             }
+            
+            if state.isSelected{
+                let moves = state.pieceSelected.calculateMoves(chessBoard: state.chessBoard)
+                ForEach(moves, id: \.self.id){ pos in
+                    ChoiceItem(pos: pos)
+                }
             }
         }
             

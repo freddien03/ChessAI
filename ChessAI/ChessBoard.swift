@@ -49,18 +49,13 @@ class ChessBoard: ObservableObject {
 
     var pieces: [Piece] = [Piece(name: "wpawn", id: "wpawn1", position: [1, 2]), Piece(name: "wpawn", id: "wpawn2", position: [2, 2]), Piece(name: "wpawn", id: "wpawn3", position: [3, 2]), Piece(name: "wpawn", id: "wpawn4", position: [4, 2]), Piece(name: "wpawn", id: "wpawn5", position: [5, 2]), Piece(name: "wpawn", id: "wpawn6", position: [6, 2]), Piece(name: "wpawn", id: "wpawn7", position: [7, 2]), Piece(name: "wpawn", id: "wpawn8", position: [8, 2]), Piece(name: "bpawn", id: "bpawn1", position: [1, 7]), Piece(name: "bpawn", id: "bpawn2", position: [2, 7]), Piece(name: "bpawn", id: "bpawn3", position: [3, 7]), Piece(name: "bpawn", id: "bpawn4", position: [4, 7]), Piece(name: "bpawn", id: "bpawn5", position: [5, 7]), Piece(name: "bpawn", id: "bpawn6", position: [6, 7]), Piece(name: "bpawn", id: "bpawn7", position: [7, 7]), Piece(name: "bpawn", id: "bpawn8", position: [8, 7]), Piece(name: "wrook", id: "wrook1", position: [1, 1]), Piece(name: "wknight", id: "wknight1", position: [2, 1]), Piece(name: "wbishop", id: "wbishop1", position: [3, 1]), Piece(name: "wqueen", id: "wqueen", position: [4, 1]), Piece(name: "wking", id: "wking", position: [5, 1]), Piece(name: "wbishop", id: "wbishop2", position: [6, 1]), Piece(name: "wknight", id: "wknight2", position: [7, 1]), Piece(name: "wrook", id: "wrook2", position: [8, 1]), Piece(name: "brook", id: "brook1", position: [1, 8]), Piece(name: "bknight", id: "bknight1", position: [2, 8]), Piece(name: "bbishop", id: "bbishop1", position: [3, 8]), Piece(name: "bqueen", id: "bqueen", position: [4, 8]), Piece(name: "bking", id: "bking", position: [5, 8]), Piece(name: "bbishop", id: "bbishop2", position: [6, 8]), Piece(name: "bknight", id: "bknight2", position: [7, 8]), Piece(name: "brook", id: "brook2", position: [8, 8])]
     
-//    func placePieces() -> some View{
-//        ZStack {
-//            ForEach(0..<pieces.count, id: \.self) { [self] num in
-//                if pieces1[pieces[num]] != [0, 0] {
-//                    Button(action: { clicked(num: num) }) {
-//                        Image(remainingPieces[num])
-//                    }
-//                        .offset(x: calcCoords(num: num)[0], y: calcCoords(num: num)[1])
-//                }
-//            }
-//        }
-//    }
-    
+    func checkForPiece(position: [Int]) -> String?{
+        for piece in self.pieces{
+            if piece.position == position{
+                return piece.name
+            }
+        }
+        return nil
+    }
     
 }

@@ -18,6 +18,8 @@
 		7E4C98EE26CEA732001839FF /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4C98ED26CEA732001839FF /* StateController.swift */; };
 		7EA0DD3426DD51A800261FBA /* PieceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0DD3326DD51A800261FBA /* PieceItem.swift */; };
 		7EA0DD3926DD558B00261FBA /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA0DD3826DD558B00261FBA /* Piece.swift */; };
+		7ECA73CD27443CF700620C4F /* ChoiceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECA73CC27443CF700620C4F /* ChoiceItem.swift */; };
+		7ECA73D727444DB200620C4F /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECA73D627444DB200620C4F /* Coord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		7E4C98ED26CEA732001839FF /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
 		7EA0DD3326DD51A800261FBA /* PieceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceItem.swift; sourceTree = "<group>"; };
 		7EA0DD3826DD558B00261FBA /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
+		7ECA73CC27443CF700620C4F /* ChoiceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceItem.swift; sourceTree = "<group>"; };
+		7ECA73D627444DB200620C4F /* Coord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +113,9 @@
 				7E4C98AE26C954C3001839FF /* File.swift */,
 				7E4C98B526C96E80001839FF /* ChessBoard.swift */,
 				7EA0DD3826DD558B00261FBA /* Piece.swift */,
+				7ECA73D627444DB200620C4F /* Coord.swift */,
 				7E4C988226C9534E001839FF /* ContentView.swift */,
+				7ECA73CC27443CF700620C4F /* ChoiceItem.swift */,
 				7EA0DD3326DD51A800261FBA /* PieceItem.swift */,
 				7E4C98ED26CEA732001839FF /* StateController.swift */,
 				7E4C988426C95353001839FF /* Assets.xcassets */,
@@ -277,8 +283,10 @@
 				7E4C988326C9534E001839FF /* ContentView.swift in Sources */,
 				7EA0DD3926DD558B00261FBA /* Piece.swift in Sources */,
 				7E4C98B626C96E81001839FF /* ChessBoard.swift in Sources */,
+				7ECA73D727444DB200620C4F /* Coord.swift in Sources */,
 				7E4C98AF26C954C3001839FF /* File.swift in Sources */,
 				7E4C988126C9534E001839FF /* ChessAIApp.swift in Sources */,
+				7ECA73CD27443CF700620C4F /* ChoiceItem.swift in Sources */,
 				7E4C98EE26CEA732001839FF /* StateController.swift in Sources */,
 				7EA0DD3426DD51A800261FBA /* PieceItem.swift in Sources */,
 			);
