@@ -57,6 +57,27 @@ class Piece: ObservableObject{
             }
         
         case "king":
+            if !hasMoved{
+                var yPos = 1
+                if colour == "b"{
+                    yPos = 8
+                }
+                if let piece = chessBoard.checkForPiece(position: [8,yPos]){
+                    if !piece.hasMoved {
+                        let temp = Coord(x: self.position[0]+2, y: yPos)
+                        temp.castle = (true, 1, yPos)
+                        positions.append(temp)
+                    }
+                }
+                if let piece = chessBoard.checkForPiece(position: [1, yPos]){
+                    if !piece.hasMoved {
+                        let temp = Coord(x: self.position[0]-2, y: yPos)
+                        temp.castle = (true, 2, yPos)
+                        positions.append(temp)
+                    }
+                }
+            }
+
             for i in -1...1 {
                 for j in -1...1{
                     if let piece = chessBoard.checkForPiece(position: [self.position[0]+i, self.position[1]+j]){

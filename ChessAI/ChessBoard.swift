@@ -13,11 +13,12 @@ class ChessBoard: ObservableObject {
     let wKing = Piece(name: "wking", id: "wking", position: [4, 1])
     let bKing = Piece(name: "bking", id: "bking", position: [4, 8])
 
-    var pieces: [Piece] = [Piece(name: "wpawn", id: "wpawn1", position: [1, 2]), Piece(name: "wpawn", id: "wpawn2", position: [2, 2]), Piece(name: "wpawn", id: "wpawn3", position: [3, 2]), Piece(name: "wpawn", id: "wpawn4", position: [4, 2]), Piece(name: "wpawn", id: "wpawn5", position: [5, 2]), Piece(name: "wpawn", id: "wpawn6", position: [6, 2]), Piece(name: "wpawn", id: "wpawn7", position: [7, 2]), Piece(name: "wpawn", id: "wpawn8", position: [8, 2]), Piece(name: "bpawn", id: "bpawn1", position: [1, 7]), Piece(name: "bpawn", id: "bpawn2", position: [2, 7]), Piece(name: "bpawn", id: "bpawn3", position: [3, 7]), Piece(name: "bpawn", id: "bpawn4", position: [4, 7]), Piece(name: "bpawn", id: "bpawn5", position: [5, 7]), Piece(name: "bpawn", id: "bpawn6", position: [6, 7]), Piece(name: "bpawn", id: "bpawn7", position: [7, 7]), Piece(name: "bpawn", id: "bpawn8", position: [8, 7]), Piece(name: "wrook", id: "wrook1", position: [1, 1]), Piece(name: "wknight", id: "wknight1", position: [2, 1]), Piece(name: "wbishop", id: "wbishop1", position: [3, 1]), Piece(name: "wqueen", id: "wqueen", position: [5, 1]), Piece(name: "wbishop", id: "wbishop2", position: [6, 1]), Piece(name: "wknight", id: "wknight2", position: [7, 1]), Piece(name: "wrook", id: "wrook2", position: [8, 1]), Piece(name: "brook", id: "brook1", position: [1, 8]), Piece(name: "bknight", id: "bknight1", position: [2, 8]), Piece(name: "bbishop", id: "bbishop1", position: [3, 8]), Piece(name: "bqueen", id: "bqueen", position: [5, 8]), Piece(name: "bbishop", id: "bbishop2", position: [6, 8]), Piece(name: "bknight", id: "bknight2", position: [7, 8]), Piece(name: "brook", id: "brook2", position: [8, 8])]
+    var pieces: [Piece]
     
-    init() {
-        pieces.append(wKing)
-        pieces.append(bKing)
+    init(pieces: [Piece]) {
+        self.pieces = pieces
+        self.pieces.append(wKing)
+        self.pieces.append(bKing)
     }
     func checkForPiece(position: [Int]) -> Piece?{
         for piece in self.pieces{
@@ -26,6 +27,10 @@ class ChessBoard: ObservableObject {
             }
         }
         return nil
+    }
+    
+    func copy() -> ChessBoard {
+        return ChessBoard(pieces: self.pieces)
     }
     
     func possStraightMoves(position: [Int], colour: String) -> [Coord]{
@@ -163,5 +168,32 @@ class ChessBoard: ObservableObject {
         }else{
             return "none"
         }
+    }
+    
+    func calculatePointDiff(colour: String)-> Int{
+        var points = 0
+        var sign = -1
+        for piece in self.pieces{
+            if piece.colour == colour{
+                sign = 1
+            }else{
+                sign = -1
+            }
+            switch piece.type{
+            case "pawn":
+                points += 1*sign
+            case "bishop":
+                points += 3*sign
+            case "knight":
+                points += 3*sign
+            case "rook":
+                points += 5*sign
+            case "queen":
+                points += 9*sign
+            default:
+                points += 0
+            }
+        }
+        return points
     }
 }

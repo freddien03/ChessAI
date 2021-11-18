@@ -32,13 +32,13 @@ struct ContentView: View {
             }
             .padding()
             
-            Button(action: {
-                state.chessBoard = ChessBoard()
-                state.turn = "w"
-            }){
-                Text("Reset")
-            }
-            .disabled(true)
+//            Button(action: {
+//                state.chessBoard = ChessBoard()
+//                state.turn = "w"
+//            }){
+//                Text("Reset")
+//            }
+//            .disabled(true)
         }
     }
 }
