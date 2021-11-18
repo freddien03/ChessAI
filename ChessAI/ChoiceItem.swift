@@ -13,11 +13,11 @@ struct ChoiceItem: View {
     @ObservedObject var pos: Coord
     var body: some View {
         Button(action: {
-            state.pieceSelected.position = [pos.xVal, pos.yVal]
-            state.isSelected.toggle()
+            state.movePiece(pos: pos)
         }){
-            Text("X")
+            Image(systemName: "circle.fill")
         }
+        .accentColor(.red)
         .offset(x: (width/2)-(2*(CGFloat(pos.xVal))-1)*(width/16), y: (width/2)-(2*CGFloat(pos.yVal)-1)*(width/16))
     }
 }

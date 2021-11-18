@@ -12,17 +12,16 @@ struct PieceItem: View {
     let width = UIScreen.main.bounds.width
     @ObservedObject var piece: Piece
     var body: some View {
-        if piece.isAlive == false{
-            Button(action: {
-                state.isSelected.toggle()
-                state.pieceSelected = piece
-            }) {
-                Image(piece.name)
-                    .resizable()
-                    .frame(width: width/8, height: width/8)
-            }
-            .offset(x: (width/2)-(2*(CGFloat(piece.position[0]))-1)*(width/16), y: (width/2)-(2*CGFloat(piece.position[1])-1)*(width/16))
+        Button(action: {
+            state.isSelected.toggle()
+            state.pieceSelected = piece
+        }) {
+            Image(piece.name)
+                .resizable()
+                .frame(width: width/8, height: width/8)
         }
+        .offset(x: (width/2)-(2*(CGFloat(piece.position[0]))-1)*(width/16), y: (width/2)-(2*CGFloat(piece.position[1])-1)*(width/16))
+        .disabled(state.turn != piece.colour)
     }
 }
 

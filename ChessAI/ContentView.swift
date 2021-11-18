@@ -12,24 +12,34 @@ struct ContentView: View {
     @EnvironmentObject var state: StateController
     let width = UIScreen.main.bounds.width
     var body: some View {
-        ZStack {
-            state.chessBoard.board
-                .fill(Color.gray)
-                .frame(width: width, height: width)
-                .border(Color.black, width: 1)
-            
-            ForEach(state.chessBoard.pieces, id: \.self.id) { piece in
-                PieceItem(piece: piece)
-            }
-            
-            if state.isSelected{
-                let moves = state.pieceSelected.calculateMoves(chessBoard: state.chessBoard)
-                ForEach(moves, id: \.self.id){ pos in
-                    ChoiceItem(pos: pos)
+        VStack{
+            ZStack {
+                state.chessBoard.board
+                    .fill(Color.gray)
+                    .frame(width: width, height: width)
+                    .border(Color.black, width: 1)
+                
+                ForEach(state.chessBoard.pieces, id: \.self.id) { piece in
+                    PieceItem(piece: piece)
+                }
+                
+                if state.isSelected{
+                    let moves = state.pieceSelected.calculateMoves(chessBoard: state.chessBoard)
+                    ForEach(moves, id: \.self.id){ pos in
+                        ChoiceItem(pos: pos)
+                    }
                 }
             }
-        }
+            .padding()
             
+            Button(action: {
+                state.chessBoard = ChessBoard()
+                state.turn = "w"
+            }){
+                Text("Reset")
+            }
+            .disabled(true)
+        }
     }
 }
 

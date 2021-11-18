@@ -8,50 +8,113 @@
 import Foundation
 
 class Piece: ObservableObject{
-
+    
+    
     let name: String
     var type: String
+    let colour: String
     let id: String
+    var hasMoved = false
     @Published var position: [Int]
-    @Published var isAlive = false
     
     init(name: String, id: String, position: [Int]) {
         self.name = name
         self.type = self.name
         self.type.removeFirst()
+        self.colour = String(self.name.prefix(1))
         self.id = id
         self.position = position
     }
+    
     
     func calculateMoves(chessBoard: ChessBoard) -> [Coord] {
         var positions: [Coord] = []
         switch self.type{
         case "pawn":
-            if let _ = chessBoard.checkForPiece(position: [self.position[0], self.position[1]+1]){
-                
+            var inc = 0
+            if colour == "w"{
+                inc = 1
             }else{
-                positions.append(Coord(x: self.position[0], y: self.position[1]+1))
+                inc = -1
             }
-            for i in stride(from: 0, to: 2, by: 2) {
-                if let _ = chessBoard.checkForPiece(position: [self.position[0], self.position[1]-1+i]){
-                    positions.append(Coord(x: self.position[0], y: self.position[1]-1+i))
-                }
-            }
-        case "rook":
-            for i in self.position[0]-1...8{
-                if let block = chessBoard.checkForPiece(position: [i, self.position[1]]){
-                    if String(block.prefix(1)) != String(self.name.prefix(1)){
-                        positions.append(Coord(x: i, y: self.position[1]))
-                        break
+            for i in 0...2 {
+                if let piece = chessBoard.checkForPiece(position: [self.position[0]-1+i, self.position[1]+inc]){
+                    if piece.colour != self.colour{
+                        if i%2 == 0{
+                            positions.append(Coord(x: self.position[0]-1+i, y: self.position[1]+inc))
+                        }
                     }
                 }else{
-                    positions.append(Coord(x: i, y: self.position[1]))
+                    if i%2 != 0{
+                        positions.append(Coord(x: self.position[0]-1+i, y: self.position[1]+inc))
+                    }
+                }
+            }
+            if self.hasMoved == false{
+                if chessBoard.checkForPiece(position: [self.position[0], self.position[1]+2*inc]) == nil{
+                    positions.append(Coord(x: self.position[0], y: self.position[1]+2*inc))
+                }
+            }
+        
+        case "king":
+            for i in -1...1 {
+                for j in -1...1{
+                    if let piece = chessBoard.checkForPiece(position: [self.position[0]+i, self.position[1]+j]){
+                        if piece.colour != self.colour{
+                            positions.append(Coord(x: self.position[0]+i, y: self.position[1]+j))
+                        }
+                    } else {
+                        positions.append(Coord(x: self.position[0]+i, y: self.position[1]+j))
+                    }
+                }
+            }
+
+        case "rook":
+            positions = chessBoard.possStraightMoves(position: self.position, colour: self.colour)
+        
+        case "bishop":
+            positions = chessBoard.possDiagMoves(position: self.position, colour: self.colour)
+        
+        case "queen":
+            positions = chessBoard.possStraightMoves(position: self.position, colour: self.colour) + chessBoard.possDiagMoves(position: self.position, colour: self.colour)
+        
+        case "knight":
+            for i in -1...1{
+                for j in -1...1{
+                    if i != 0 && j != 0{
+                        if let piece = chessBoard.checkForPiece(position: [self.position[0]+(2*i), self.position[1]+j]){
+                            if piece.colour != self.colour{
+                                positions.append(Coord(x: self.position[0]+(2*i), y: self.position[1]+j))
+                            }
+                        } else {
+                            positions.append(Coord(x: self.position[0]+(2*i), y: self.position[1]+j))
+                        }
+                        if let piece = chessBoard.checkForPiece(position: [self.position[0]+j, self.position[1]+(2*i)]){
+                            if piece.colour != self.colour{
+                                positions.append(Coord(x: self.position[0]+j, y: self.position[1]+(i*2)))
+                            }
+                        } else {
+                            positions.append(Coord(x: self.position[0]+j, y: self.position[1]+(i*2)))
+                        }
+                    }
                 }
             }
         default:
             positions = [Coord(x:3, y:5),Coord(x:6, y:3)]
         }
-        return positions
+        var newPositions: [Coord] = []
+        for position in positions{
+            if position.xVal > 0 && position.xVal <= 8 && position.yVal > 0 && position.yVal <= 8{
+                if let piece = chessBoard.checkForPiece(position: [position.xVal, position.yVal]){
+                    if piece.type != "king"{
+                        newPositions.append(position)
+                    }
+                } else{
+                    newPositions.append(position)
+                }
+            }
+        }
+        return newPositions
     }
     
     #if DEBUG
