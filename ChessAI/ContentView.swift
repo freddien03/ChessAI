@@ -20,7 +20,16 @@ struct ContentView: View {
                     .border(Color.black, width: 1)
                 
                 ForEach(state.chessBoard.pieces, id: \.self.id) { piece in
-                    PieceItem(piece: piece)
+                    Button(action: {
+                        state.isSelected.toggle()
+                        state.pieceSelected = piece
+                    }) {
+                        Image(piece.name)
+                            .resizable()
+                            .frame(width: width/8, height: width/8)
+                    }
+                    .offset(x: (width/2)-(2*(CGFloat(piece.position[0]))-1)*(width/16), y: (width/2)-(2*CGFloat(piece.position[1])-1)*(width/16))
+                    .disabled(state.turn != piece.colour)
                 }
                 
                 if state.isSelected{
@@ -32,6 +41,7 @@ struct ContentView: View {
             }
             .padding()
             
+            Text(String(state.chessBoard.calculatePointDiff(colour: "w")))
 //            Button(action: {
 //                state.chessBoard = ChessBoard()
 //                state.turn = "w"

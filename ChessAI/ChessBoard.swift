@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class ChessBoard: ObservableObject {
+class ChessBoard: NSObject, ObservableObject, NSCopying {
     let board = Board(rows: 8, columns: 8)
     let wKing = Piece(name: "wking", id: "wking", position: [4, 1])
     let bKing = Piece(name: "bking", id: "bking", position: [4, 8])
@@ -29,8 +29,9 @@ class ChessBoard: ObservableObject {
         return nil
     }
     
-    func copy() -> ChessBoard {
-        return ChessBoard(pieces: self.pieces)
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = ChessBoard(pieces: self.pieces)
+        return copy
     }
     
     func possStraightMoves(position: [Int], colour: String) -> [Coord]{
@@ -149,13 +150,11 @@ class ChessBoard: ObservableObject {
         for piece in self.pieces{
             if piece.colour != king.colour{
                 for position in piece.calculateMoves(chessBoard: self){
-                    if [position.xVal, position.yVal] == king.position{
+                    if position.pos() == king.position{
                         check = true
                         mate = true
                     }
                 }
-            } else {
-                
             }
         }
         if king.calculateMoves(chessBoard: self) != []{
@@ -195,5 +194,61 @@ class ChessBoard: ObservableObject {
             }
         }
         return points
+    }
+    
+    func movePiece(piece: Piece, turn: String, pos: Coord) -> Bool{
+        var tempPiece: Piece? = nil
+        var acceptMove = true
+        //
+        print(self.isInCheck(colour: turn))
+        if turn == "b"{
+            print(self.isInCheck(colour: "w"))
+        }else{
+            print(self.isInCheck(colour: "b"))
+        }
+        //
+//        let newBoard = self.copy() as! ChessBoard
+//        newBoard.movePiece(piece: piece, turn: turn, pos: pos)
+        
+        let tempCoord = piece.position
+        if let piece = self.checkForPiece(position: pos.pos()){
+            tempPiece = piece
+            self.pieces.remove(at: self.pieces.firstIndex(of: piece)!)
+        }
+        moveCoord(pos: pos, piece: piece)
+        if self.isInCheck(colour: turn) != "none"{
+            acceptMove = false
+        }
+        moveCoord(pos: Coord(x: tempCoord[0], y: tempCoord[1]), piece: piece)
+        if let temp = tempPiece{
+            self.pieces.append(temp)
+        }
+        
+        
+        if acceptMove == true{
+            if let piece = self.checkForPiece(position: pos.pos()){
+                self.pieces.remove(at: self.pieces.firstIndex(of: piece)!)
+            }
+            moveCoord(pos: pos, piece: piece)
+            piece.hasMoved = true
+            return true
+        }
+        return false
+    }
+    
+    func moveCoord(pos: Coord, piece: Piece){
+        piece.position = pos.pos()
+        if pos.castle.0 == true{
+            if pos.castle.1 == 1{
+                if let piece = self.checkForPiece(position: [8, pos.castle.2]){
+                    piece.position = [pos.xVal-1, pos.yVal]
+                }
+            }
+            if pos.castle.1 == 2{
+                if let piece = self.checkForPiece(position: [1, pos.castle.2]){
+                    piece.position = [pos.xVal+1, pos.yVal]
+                }
+            }
+        }
     }
 }

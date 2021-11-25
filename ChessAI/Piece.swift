@@ -13,7 +13,7 @@ class Piece: ObservableObject{
     let name: String
     var type: String
     let colour: String
-    let id: String
+    let id = UUID()
     var hasMoved = false
     @Published var position: [Int]
     
@@ -22,7 +22,7 @@ class Piece: ObservableObject{
         self.type = self.name
         self.type.removeFirst()
         self.colour = String(self.name.prefix(1))
-        self.id = id
+//        self.id = id
         self.position = position
     }
     
@@ -63,17 +63,21 @@ class Piece: ObservableObject{
                     yPos = 8
                 }
                 if let piece = chessBoard.checkForPiece(position: [8,yPos]){
-                    if !piece.hasMoved {
-                        let temp = Coord(x: self.position[0]+2, y: yPos)
-                        temp.castle = (true, 1, yPos)
-                        positions.append(temp)
+                    if chessBoard.checkForPiece(position: [7,yPos]) == nil || chessBoard.checkForPiece(position: [6,yPos])  == nil{
+                        if !piece.hasMoved {
+                            let temp = Coord(x: self.position[0]+2, y: yPos)
+                            temp.castle = (true, 1, yPos)
+                            positions.append(temp)
+                        }
                     }
                 }
                 if let piece = chessBoard.checkForPiece(position: [1, yPos]){
-                    if !piece.hasMoved {
-                        let temp = Coord(x: self.position[0]-2, y: yPos)
-                        temp.castle = (true, 2, yPos)
-                        positions.append(temp)
+                    if chessBoard.checkForPiece(position: [2,yPos]) == nil || chessBoard.checkForPiece(position: [3,yPos])  == nil{
+                        if !piece.hasMoved {
+                            let temp = Coord(x: self.position[0]-2, y: yPos)
+                            temp.castle = (true, 2, yPos)
+                            positions.append(temp)
+                        }
                     }
                 }
             }
@@ -127,9 +131,10 @@ class Piece: ObservableObject{
         for position in positions{
             if position.xVal > 0 && position.xVal <= 8 && position.yVal > 0 && position.yVal <= 8{
                 if let piece = chessBoard.checkForPiece(position: [position.xVal, position.yVal]){
-                    if piece.type != "king"{
-                        newPositions.append(position)
-                    }
+                    newPositions.append(position)
+//                    if piece.type != "king"{
+//                        newPositions.append(position)
+//                    }
                 } else{
                     newPositions.append(position)
                 }
