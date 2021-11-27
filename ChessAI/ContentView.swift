@@ -13,6 +13,10 @@ struct ContentView: View {
     let width = UIScreen.main.bounds.width
     var body: some View {
         VStack{
+            if let game = state.gameOver{
+                Text("\(game) WON")
+                    .font(.title)
+            }
             ZStack {
                 state.chessBoard.board
                     .fill(Color.gray)
@@ -33,7 +37,7 @@ struct ContentView: View {
                 }
                 
                 if state.isSelected{
-                    let moves = state.pieceSelected.calculateMoves(chessBoard: state.chessBoard)
+                    let moves = state.pieceSelected.calculateMoves(chessBoard: state.chessBoard, removeCheck: true)
                     ForEach(moves, id: \.self.id){ pos in
                         ChoiceItem(pos: pos)
                     }

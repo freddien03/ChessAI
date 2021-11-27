@@ -27,7 +27,7 @@ class Piece: ObservableObject{
     }
     
     
-    func calculateMoves(chessBoard: ChessBoard) -> [Coord] {
+    func calculateMoves(chessBoard: ChessBoard, removeCheck: Bool = false) -> [Coord] {
         var positions: [Coord] = []
         switch self.type{
         case "pawn":
@@ -63,7 +63,7 @@ class Piece: ObservableObject{
                     yPos = 8
                 }
                 if let piece = chessBoard.checkForPiece(position: [8,yPos]){
-                    if chessBoard.checkForPiece(position: [7,yPos]) == nil || chessBoard.checkForPiece(position: [6,yPos])  == nil{
+                    if chessBoard.checkForPiece(position: [7,yPos]) == nil && chessBoard.checkForPiece(position: [6,yPos])  == nil{
                         if !piece.hasMoved {
                             let temp = Coord(x: self.position[0]+2, y: yPos)
                             temp.castle = (true, 1, yPos)
@@ -72,7 +72,7 @@ class Piece: ObservableObject{
                     }
                 }
                 if let piece = chessBoard.checkForPiece(position: [1, yPos]){
-                    if chessBoard.checkForPiece(position: [2,yPos]) == nil || chessBoard.checkForPiece(position: [3,yPos])  == nil{
+                    if chessBoard.checkForPiece(position: [2,yPos]) == nil && chessBoard.checkForPiece(position: [3,yPos])  == nil{
                         if !piece.hasMoved {
                             let temp = Coord(x: self.position[0]-2, y: yPos)
                             temp.castle = (true, 2, yPos)
@@ -130,12 +130,28 @@ class Piece: ObservableObject{
         var newPositions: [Coord] = []
         for position in positions{
             if position.xVal > 0 && position.xVal <= 8 && position.yVal > 0 && position.yVal <= 8{
-                if let piece = chessBoard.checkForPiece(position: [position.xVal, position.yVal]){
-                    newPositions.append(position)
-//                    if piece.type != "king"{
-//                        newPositions.append(position)
+                if removeCheck == true{
+                    var tempPiece: Piece? = nil
+                    
+                    let tempCoord = self.position
+                    if let piece = chessBoard.checkForPiece(position: position.pos()){
+                        tempPiece = piece
+                        chessBoard.pieces.remove(at: chessBoard.pieces.firstIndex(of: piece)!)
+                    }
+                    chessBoard.moveCoord(pos: position, piece: self)
+                    if chessBoard.isInCheck(colour: self.colour) == "none"{
+                        newPositions.append(position)
+                    }
+                    chessBoard.moveCoord(pos: Coord(x: tempCoord[0], y: tempCoord[1]), piece: self)
+//                    if position.castle.0 == true{
+//                        if position.castle.1 == 1{
+//                            
+//                        }
 //                    }
-                } else{
+                    if let temp = tempPiece{
+                        chessBoard.pieces.append(temp)
+                    }
+                } else {
                     newPositions.append(position)
                 }
             }

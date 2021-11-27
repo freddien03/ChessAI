@@ -8,8 +8,28 @@
 import Foundation
 
 class StateController: ObservableObject {
+    @Published var gameOver: String? = nil
     @Published var turn = "w" {
         didSet{
+            var isMate = true
+            for piece in chessBoard.pieces{
+                if piece.colour == turn{
+                    if piece.calculateMoves(chessBoard: chessBoard, removeCheck: true) != [] {
+                        isMate = false
+                    }
+                }
+            }
+            if isMate{
+                print("mate")
+            }
+            if isMate{
+                if turn == "w"{
+                    gameOver = "b"
+                }else{
+                    gameOver = "w"
+                }
+            }
+            
 //            if turn == "b"{
 //                let best = self.compMove()
 //                print(best)
@@ -53,9 +73,12 @@ class StateController: ObservableObject {
     }
     
     func movePiece(pos: Coord){
-        if chessBoard.movePiece(piece: pieceSelected, turn: turn, pos: pos) == true{
-            self.toggleTurn()
+        if let piece = chessBoard.checkForPiece(position: pos.pos()){
+            chessBoard.pieces.remove(at: chessBoard.pieces.firstIndex(of: piece)!)
         }
+        self.moveCoord(pos: pos)
+        self.pieceSelected.hasMoved = true
+        self.toggleTurn()
         self.isSelected = false
     }
 }

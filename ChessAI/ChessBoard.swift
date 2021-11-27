@@ -195,47 +195,7 @@ class ChessBoard: NSObject, ObservableObject, NSCopying {
         }
         return points
     }
-    
-    func movePiece(piece: Piece, turn: String, pos: Coord) -> Bool{
-        var tempPiece: Piece? = nil
-        var acceptMove = true
-        //
-        print(self.isInCheck(colour: turn))
-        if turn == "b"{
-            print(self.isInCheck(colour: "w"))
-        }else{
-            print(self.isInCheck(colour: "b"))
-        }
-        //
-//        let newBoard = self.copy() as! ChessBoard
-//        newBoard.movePiece(piece: piece, turn: turn, pos: pos)
-        
-        let tempCoord = piece.position
-        if let piece = self.checkForPiece(position: pos.pos()){
-            tempPiece = piece
-            self.pieces.remove(at: self.pieces.firstIndex(of: piece)!)
-        }
-        moveCoord(pos: pos, piece: piece)
-        if self.isInCheck(colour: turn) != "none"{
-            acceptMove = false
-        }
-        moveCoord(pos: Coord(x: tempCoord[0], y: tempCoord[1]), piece: piece)
-        if let temp = tempPiece{
-            self.pieces.append(temp)
-        }
-        
-        
-        if acceptMove == true{
-            if let piece = self.checkForPiece(position: pos.pos()){
-                self.pieces.remove(at: self.pieces.firstIndex(of: piece)!)
-            }
-            moveCoord(pos: pos, piece: piece)
-            piece.hasMoved = true
-            return true
-        }
-        return false
-    }
-    
+
     func moveCoord(pos: Coord, piece: Piece){
         piece.position = pos.pos()
         if pos.castle.0 == true{
